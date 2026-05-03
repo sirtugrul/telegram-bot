@@ -10,16 +10,8 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
 kelimeler = {
-    "elma": "manzana",
-    "ev": "casa",
-    "araba": "coche",
-    "kitap": "libro",
-    "su": "agua",
-    "güneş": "sol",
-    "köpek": "perro",
-    "kedi": "gato",
-    "okul": "escuela",
-    "arkadaş": "amigo",
+    'sevgili':'Pareja','yalnız':'Solo','kat':'Piso','küçük':'Pequeno','uzak':'Lejos','daire':'Apartamento','yaşamak':'Vivo','bina':'Edifico',' en büyük':'Mas grande','bu':'Este','üç':'Tres','mango':'Mango','iki':'Dos','portakal':'Naranja','ne kadar':'Cuanto cuesto','şeftali':'Durazno','ihtiyaç':'Necesito','Pazar':'Mercado','poşet':'Bolsa','ananas':'Pina','karpuz':'Sandia','aralık':'Diciembre','ekim':'Octubre','orada':'Alli','çok':'Mucho','güneş':'Sol','kış':'İnvierno','ilkbahar':'Primavera','eylül':'Septiembre','ülke':'Pais','mart':'Marzo','bugün':'Hoy','mayo':'Traje de bano','yaz':'Verano','şimdi':'Ahora','temmuz':'Julio','ocak':'Enero','sıcak':'Calor','rüzgarlı':'Viento','hava':'Hace','giymek':'Uso','palto':'Abrigo','sonbahar':'Otono','soğuk':'Frio','sanat':'Arte','müzik':'Musica','çalışmak':'Estudias','gece':'Noche','sabah':'Manana','vay':'Guau','almanca':'Aleman','italyanca':'İtaliano','biraz':'Poco','konuşmak':'Hablo',' fransızca':'Frances ','ingilizce':'Ingles','ispanyolca':'Espanol','Portekizce':'Portugues','kasaba':'Pueblo','bak':'Mira','park':'Parque','şehir':'Ciudad','hey':'Oye','otel':'Hotel','kitabevi':'Libraria','mahalle':'Barrio','otopark':'Estacionamiento','banka':'Banço','AVM':'Centro comercial','yakınlarda':'Cerca','müze':'Museo','kafe':'Cafeteria','fırın':'Panaderia','mağaza':'Tienda','çanta':'Mochila','tablet':'Tableto',' kitap':'Libro','yeni':'Nuevo','şarj cihazı':'Cargador','şapka':'Gorra','saat':'Reloj','süveter':'Sueter','ceket':'Chaqueta','elbise':'Vestido','cüzdan':'Cartera','burda':'Aqui','sakin':'Tranquilo','valiz':'Maleta','ciddi':'Serio','komik':'Graciosa ','nasıl':'Como','ama':'Pero ','erkek arkadaş':'Novio',' kız arkadaş':'Novia ','genelde':'En general','sanırım':'Creo que',' sempatik':'Simpitico','değil mi':'No crees',' utangaç':'Timido','büyükanne':'Abuela','büyükbaba':'Abuelo','karı':'Esposa ','koca':'Esposo','sadece':'Solamento',' -da':'Tambien','teyze':'Tia','amca':'Tio',' aslında':'En realidad','kız':'Hija ','oğul':'Hijo','var':'Tengo','kız kardeş':'hermana','erkek kardeş':'hermano',' oda arkadaşı':'Companero de cuarto','Hayır':'No',' evet':'Si','değil mi ?':'Verdad ','Fransa':'Francia','Almanya':'Alemania','meyve suyu':'Jugo','iyi':'Bien','memnun oldum':'Encantado','hoş geldin':'Bien venida','en iyi':'Mejor','günaydın':'Buenos dias','memnun oldum':'Mucho gusto','görüşürüz':'Hasta luego','ekmek':'Pan','dondurma':'Helado','şeker':'Azucar','mükemmel':'Perfecto','teşekkürler':'Gracias','güle güle':'Chao','ve':'Y','su':'Agua','buz':'Hielo','veya':'O','çay':'Te',' kahve':'Cafe','süt':'Leche'
+
 }
 
 aktif_sorular = {}
@@ -28,7 +20,6 @@ aktif_sorular = {}
 async def start(message: types.Message):
     await message.answer(
         "👋 Hola! İspanyolca kelime botuna hoş geldin!\n\n"
-        "SELAM ESRA"
         "📚 Komutlar:\n"
         "/sor — Sana bir kelime sorayım\n"
         "/ogret kelime:cevap — Yeni kelime ekle\n"
