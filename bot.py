@@ -28,6 +28,7 @@ aktif_sorular = {}
 async def start(message: types.Message):
     await message.answer(
         "👋 Hola! İspanyolca kelime botuna hoş geldin!\n\n"
+        "SELAM ESRA"
         "📚 Komutlar:\n"
         "/sor — Sana bir kelime sorayım\n"
         "/ogret kelime:cevap — Yeni kelime ekle\n"
