@@ -3,7 +3,8 @@ import random
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 
-TOKEN = "8764241778:AAE4TuvYqrOCriOxUymdXd1a-IkS6x9Tygs"
+import os
+TOKEN = os.environ.get("TOKEN")
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
