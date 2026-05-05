@@ -64,8 +64,10 @@ async def cevap_kontrol(message: types.Message):
     if verilen == doğru.lower():
         await message.answer(f"✅ Doğru! '{türkçe}' = '{doğru}' 🎉")
         del aktif_sorular[chat_id]
+        sor()
     else:
         await message.answer(f"❌ Yanlış! Tekrar dene.")
+        
 
 async def main():
     print("Bot çalışıyor... 🚀")
