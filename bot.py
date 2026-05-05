@@ -64,7 +64,10 @@ async def cevap_kontrol(message: types.Message):
     if verilen == doğru.lower():
         await message.answer(f"✅ Doğru! '{türkçe}' = '{doğru}' 🎉")
         del aktif_sorular[chat_id]
-        sor()
+        # Otomatik yeni soru sor
+        yeni_türkçe, yeni_ispanyolca = random.choice(list(kelimeler.items()))
+        aktif_sorular[chat_id] = (yeni_türkçe, yeni_ispanyolca)
+        await message.answer(f"➡️ Sıradaki soru:\n🇪🇸 '{yeni_türkçe}' kelimesinin İspanyolcası nedir?")
     else:
         await message.answer(f"❌ Yanlış! Tekrar dene.")
         
