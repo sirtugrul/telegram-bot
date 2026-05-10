@@ -14,10 +14,10 @@ kelimeler = {
 
 aktif_sorular = {}
 
-def ipucu_goster(ispanyolca: str, acik_harf: int) -> str:
+def ipucu_goster(cevap: str, acik_harf: int) -> str:
     sonuc = ""
     harf_sayaci = 0
-    for karakter in ispanyolca:
+    for karakter in cevap:
         if karakter == " ":
             sonuc += " "
         else:
@@ -28,13 +28,14 @@ def ipucu_goster(ispanyolca: str, acik_harf: int) -> str:
                 sonuc += "_"
     return sonuc
 
-def yeni_soru_baslat(chat_id: int):
+def yeni_soru_baslat(chat_id: int, mod: str):
     türkçe, ispanyolca = random.choice(list(kelimeler.items()))
     aktif_sorular[chat_id] = {
         'türkçe': türkçe,
         'ispanyolca': ispanyolca,
         'yanlis': 0,
-        'acik': 0
+        'acik': 0,
+        'mod': mod  # 'tr_isp' veya 'isp_tr'
     }
     return türkçe, ispanyolca
 
@@ -43,7 +44,8 @@ async def start(message: types.Message):
     await message.answer(
         "👋 Hola! İspanyolca kelime botuna hoş geldin!\n\n"
         "📚 Komutlar:\n"
-        "/sor — Sana bir kelime sorayım\n"
+        "/sor — Türkçe → İspanyolca sorar\n"
+        "/sor_tr_isp — İspanyolca → Türkçe sorar\n"
         "/ogret kelime:cevap — Yeni kelime ekle\n"
         "/liste — Tüm kelimeleri gör\n"
         "kelime anlamı — Kelimenin İspanyolcasını öğren\n\n"
@@ -55,9 +57,18 @@ async def sor(message: types.Message):
     if not kelimeler:
         await message.answer("Kelime listesi boş! /ogret ile kelime ekle.")
         return
-    türkçe, ispanyolca = yeni_soru_baslat(message.chat.id)
+    türkçe, ispanyolca = yeni_soru_baslat(message.chat.id, 'tr_isp')
     ipucu_bos = ipucu_goster(ispanyolca, 0)
     await message.answer(f"🇪🇸 '{türkçe}' kelimesinin İspanyolcası nedir?\n\n{ipucu_bos}")
+
+@dp.message(Command("sor_tr_isp"))
+async def sor_tr_isp(message: types.Message):
+    if not kelimeler:
+        await message.answer("Kelime listesi boş! /ogret ile kelime ekle.")
+        return
+    türkçe, ispanyolca = yeni_soru_baslat(message.chat.id, 'isp_tr')
+    ipucu_bos = ipucu_goster(türkçe, 0)
+    await message.answer(f"🇹🇷 '{ispanyolca}' kelimesinin Türkçesi nedir?\n\n{ipucu_bos}")
 
 @dp.message(Command("ogret"))
 async def ogret(message: types.Message):
@@ -99,30 +110,17 @@ async def cevap_kontrol(message: types.Message):
     soru = aktif_sorular[chat_id]
     türkçe = soru['türkçe']
     ispanyolca = soru['ispanyolca']
+    mod = soru['mod']
     verilen = metin.lower()
 
-    if verilen == ispanyolca.lower():
-        await message.answer(f"✅ Doğru! '{türkçe}' = '{ispanyolca}' 🎉")
-        yeni_türkçe, yeni_ispanyolca = yeni_soru_baslat(chat_id)
-        ipucu_bos = ipucu_goster(yeni_ispanyolca, 0)
-        await message.answer(f"➡️ Sıradaki soru:\n🇪🇸 '{yeni_türkçe}' kelimesinin İspanyolcası nedir?\n\n{ipucu_bos}")
+    # Moda göre soru ve cevap belirle
+    if mod == 'tr_isp':
+        soru_kelime = türkçe
+        dogru = ispanyolca
+        yeni_mod_flag = 'tr_isp'
+        soru_oku = lambda t, i: f"➡️ Sıradaki soru:\n🇪🇸 '{t}' kelimesinin İspanyolcası nedir?\n\n"
+        soru_oku2 = lambda t, i: f"➡️ 🇪🇸 '{t}' kelimesinin İspanyolcası nedir?\n\n"
+        ipucu_kelime = lambda t, i: i
     else:
-        soru['yanlis'] += 1
-        soru['acik'] += 1
-        yanlis = soru['yanlis']
-
-        if yanlis >= 3:
-            await message.answer(f"❌ 3 yanlış! Cevap: '{ispanyolca}' 😅\n\nYeni soru geliyor...")
-            yeni_türkçe, yeni_ispanyolca = yeni_soru_baslat(chat_id)
-            ipucu_bos = ipucu_goster(yeni_ispanyolca, 0)
-            await message.answer(f"➡️ 🇪🇸 '{yeni_türkçe}' kelimesinin İspanyolcası nedir?\n\n{ipucu_bos}")
-        else:
-            ipucu = ipucu_goster(ispanyolca, soru['acik'])
-            await message.answer(f"❌ Yanlış! ({yanlis}/3)\n\n💡 İpucu: {ipucu}")
-
-async def main():
-    print("Bot çalışıyor... 🚀")
-    await dp.start_polling(bot)
-
-if __name__ == "__main__":
-    asyncio.run(main())
+        soru_kelime = ispanyolca
+        dogru = tür
