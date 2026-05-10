@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 import os
 
-TOKEN = os.environ.get("TOKEN")
+TOKEN = "YENI_TOKENINI_YAZ"
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
@@ -35,7 +35,7 @@ def yeni_soru_baslat(chat_id: int, mod: str):
         'ispanyolca': ispanyolca,
         'yanlis': 0,
         'acik': 0,
-        'mod': mod  # 'tr_isp' veya 'isp_tr'
+        'mod': mod
     }
     return türkçe, ispanyolca
 
@@ -55,7 +55,7 @@ async def start(message: types.Message):
 @dp.message(Command("sor"))
 async def sor(message: types.Message):
     if not kelimeler:
-        await message.answer("Kelime listesi boş! /ogret ile kelime ekle.")
+        await message.answer("Kelime listesi boş!")
         return
     türkçe, ispanyolca = yeni_soru_baslat(message.chat.id, 'tr_isp')
     ipucu_bos = ipucu_goster(ispanyolca, 0)
@@ -64,7 +64,7 @@ async def sor(message: types.Message):
 @dp.message(Command("sor_tr_isp"))
 async def sor_tr_isp(message: types.Message):
     if not kelimeler:
-        await message.answer("Kelime listesi boş! /ogret ile kelime ekle.")
+        await message.answer("Kelime listesi boş!")
         return
     türkçe, ispanyolca = yeni_soru_baslat(message.chat.id, 'isp_tr')
     ipucu_bos = ipucu_goster(türkçe, 0)
@@ -93,34 +93,4 @@ async def liste(message: types.Message):
 @dp.message()
 async def cevap_kontrol(message: types.Message):
     chat_id = message.chat.id
-    metin = message.text.strip()
-
-    # "kelime anlamı" özelliği
-    if metin.lower().endswith(" anlamı") or metin.lower().endswith(" anlami"):
-        aranan = metin.lower().replace(" anlamı", "").replace(" anlami", "").strip().title()
-        if aranan in kelimeler:
-            await message.answer(f"📖 '{aranan}' = 🇪🇸 {kelimeler[aranan]}")
-        else:
-            await message.answer(f"❓ '{aranan}' kelimesi listede bulunamadı.")
-        return
-
-    if chat_id not in aktif_sorular:
-        return
-
-    soru = aktif_sorular[chat_id]
-    türkçe = soru['türkçe']
-    ispanyolca = soru['ispanyolca']
-    mod = soru['mod']
-    verilen = metin.lower()
-
-    # Moda göre soru ve cevap belirle
-    if mod == 'tr_isp':
-        soru_kelime = türkçe
-        dogru = ispanyolca
-        yeni_mod_flag = 'tr_isp'
-        soru_oku = lambda t, i: f"➡️ Sıradaki soru:\n🇪🇸 '{t}' kelimesinin İspanyolcası nedir?\n\n"
-        soru_oku2 = lambda t, i: f"➡️ 🇪🇸 '{t}' kelimesinin İspanyolcası nedir?\n\n"
-        ipucu_kelime = lambda t, i: i
-    else:
-        soru_kelime = ispanyolca
-        dogru = tür
+    metin = message.text.strip
