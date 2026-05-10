@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import asyncio
 import random
 from aiogram import Bot, Dispatcher, types
@@ -9,7 +10,40 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
 kelimeler = {
-    'Palto':'Abrigo','Büyükanne':'Abuela','Büyükbaba':'Abuelo','Su':'Agua','Şimdi':'Ahora','Almanca':'Aleman','Almanya':'Alemania','Orada':'Alli','Daire':'Apartamento','Burda':'Aqui','Sanat':'Arte','Şeker':'Azucar','Banka':'Banco','Mahalle':'Barrio','İyi':'Bien','Hoş Geldin':'Bien Venida','Poşet':'Bolsa','Güzel':'Bonito','Günaydın':'Buenos Dias','Kahve':'Cafe','Kafe':'Cafeteria','Sıcak':'Calor','Şarj Cihazı':'Cargador','Cüzdan':'Cartera','Avm':'Centro Comercial','Yakınlarda':'Cerca','Güle Güle':'Chao','Ceket':'Chaqueta','Şehir':'Ciudad','Nasıl':'Como','Oda Arkadaşı':'Companero De Cuarto','Sanırım':'Creo Que','Ne Kadar':'Cuanto Cuesto','Aralık':'Diciembre','İki':'Dos','Şeftali':'Durazno','Bina':'Edifico','Genelde':'En General','Aslında':'En Realidad','Memnun Oldum':'Encantado','Ocak':'Enero','İspanyolca':'Espanol','Karı':'Esposa','Koca':'Esposo','Otopark':'Estacionamiento','Bu':'Este','Çalışmak':'Estudiar','Fransızca':'Frances','Fransa':'Francia','Soğuk':'Frio','Garaj':'Garaje','Şapka':'Gorra','Teşekkürler':'Gracias','Komik':'Graciosa','Büyük':'Grande','Vay':'Guau','Konuşmak':'Hablar','Hava':'Hace','Görüşürüz':'Hasta Luego','Dondurma':'Helado','Kız Kardeş':'Hermana','Erkek Kardeş':'Hermano','Buz':'Hielo','Kız':'Hija','Oğul':'Hijo','Otel':'Hotel','Bugün':'Hoy','İngilizce':'Ingles','İtalyanca':'Italiano','Kış':'Invierno','Bahçe':'Jardin','Meyve Suyu':'Jugo','Temmuz':'Julio','Süt':'Leche','Uzak':'Lejos','Kitabevi':'Libraria','Kitap':'Libro','Valiz':'Maleta','Sabah':'Manana','Mango':'Mango','Mart':'Marzo','En Büyük':'Mas Grande','En İyi':'Mejor','Pazar':'Mercado','Bak':'Mira','Çanta':'Mochila','Çok':'Mucho','Memnun Oldum':'Mucho Gusto','Müze':'Museo','Müzik':'Musica','Portakal':'Naranja','İhtiyaç Var':'Necesito','Hayır':'No','Değil Mi':'No Crees','Gece':'Noche','Kız Arkadaş':'Novia','Erkek Arkadaş':'Novio','Yeni':'Nuevo','Veya':'O','Ekim':'Octubre','Sonbahar':'Otono','Hey':'Oye','Ülke':'Pais','Ekmek':'Pan','Fırın':'Panaderia','Sevgili':'Pareja','Park':'Parque','Küçük':'Pequeno','Mükemmel':'Perfecto','Ama':'Pero','Ananas':'Pina','Kat':'Piso','Biraz':'Poco','Portekizce':'Portugues','İlkbahar':'Primavera','Kasaba':'Pueblo','Saat':'Reloj','Karpuz':'Sandia','Eylül':'Septiembre','Ciddi':'Serio','Evet':'Si','Sempatik':'Simpatico','Güneş':'Sol','Sadece':'Solamento','Yalnız':'Solo','Süveter':'Sueter','Tablet':'Tableto','"-Da"':'Tambien','Çay':'Te','Sahiplik':'Tengo','Teras':'Terraza','Teyze':'Tia','Mağaza':'Tienda','Utangaç':'Timido','Amca':'Tio','Mayo':'Traje De Bano','Sakin':'Tranquilo','Üç':'Tres','Giymek':'Usar','Yaz':'Verano','Değil Mi ?':'Verdad','Elbise':'Vestido','Rüzgarlı':'Viento','Yaşamak':'Vivir','Ve':'Y'
+    'Palto':'Abrigo','Buyukanne':'Abuela','Buyukbaba':'Abuelo','Su':'Agua',
+    'Simdi':'Ahora','Almanca':'Aleman','Almanya':'Alemania','Orada':'Alli',
+    'Daire':'Apartamento','Burda':'Aqui','Sanat':'Arte','Seker':'Azucar',
+    'Banka':'Banco','Mahalle':'Barrio','Iyi':'Bien','Hos Geldin':'Bien Venida',
+    'Poset':'Bolsa','Guzel':'Bonito','Gunaydin':'Buenos Dias','Kahve':'Cafe',
+    'Kafe':'Cafeteria','Sicak':'Calor','Sarj Cihazi':'Cargador','Cuzdan':'Cartera',
+    'Avm':'Centro Comercial','Yakinlarda':'Cerca','Gule Gule':'Chao','Ceket':'Chaqueta',
+    'Sehir':'Ciudad','Nasil':'Como','Oda Arkadasi':'Companero De Cuarto',
+    'Sanirim':'Creo Que','Ne Kadar':'Cuanto Cuesto','Aralik':'Diciembre','Iki':'Dos',
+    'Seftali':'Durazno','Bina':'Edifico','Genelde':'En General','Aslinda':'En Realidad',
+    'Memnun Oldum':'Encantado','Ocak':'Enero','Ispanyolca':'Espanol','Kari':'Esposa',
+    'Koca':'Esposo','Otopark':'Estacionamiento','Bu':'Este','Calismak':'Estudiar',
+    'Fransizca':'Frances','Fransa':'Francia','Soguk':'Frio','Garaj':'Garaje',
+    'Sapka':'Gorra','Tesekkurler':'Gracias','Komik':'Graciosa','Buyuk':'Grande',
+    'Vay':'Guau','Konusmak':'Hablar','Hava':'Hace','Gorusuruz':'Hasta Luego',
+    'Dondurma':'Helado','Kiz Kardes':'Hermana','Erkek Kardes':'Hermano','Buz':'Hielo',
+    'Kiz':'Hija','Ogul':'Hijo','Otel':'Hotel','Bugun':'Hoy','Ingilizce':'Ingles',
+    'Italyanca':'Italiano','Kis':'Invierno','Bahce':'Jardin','Meyve Suyu':'Jugo',
+    'Temmuz':'Julio','Sut':'Leche','Uzak':'Lejos','Kitabevi':'Libraria','Kitap':'Libro',
+    'Valiz':'Maleta','Sabah':'Manana','Mango':'Mango','Mart':'Marzo',
+    'En Buyuk':'Mas Grande','En Iyi':'Mejor','Pazar':'Mercado','Bak':'Mira',
+    'Canta':'Mochila','Cok':'Mucho','Muze':'Museo','Muzik':'Musica',
+    'Portakal':'Naranja','Ihtiyac Var':'Necesito','Hayir':'No','Gece':'Noche',
+    'Kiz Arkadas':'Novia','Erkek Arkadas':'Novio','Yeni':'Nuevo','Veya':'O',
+    'Ekim':'Octubre','Sonbahar':'Otono','Hey':'Oye','Ulke':'Pais','Ekmek':'Pan',
+    'Firin':'Panaderia','Sevgili':'Pareja','Park':'Parque','Kucuk':'Pequeno',
+    'Mukemmel':'Perfecto','Ama':'Pero','Ananas':'Pina','Kat':'Piso','Biraz':'Poco',
+    'Portekizce':'Portugues','Ilkbahar':'Primavera','Kasaba':'Pueblo','Saat':'Reloj',
+    'Karpuz':'Sandia','Eylul':'Septiembre','Ciddi':'Serio','Evet':'Si',
+    'Sempatik':'Simpatico','Gunes':'Sol','Sadece':'Solamente','Yalniz':'Solo',
+    'Suveter':'Sueter','Tablet':'Tableta','Cay':'Te','Teras':'Terraza',
+    'Teyze':'Tia','Magaza':'Tienda','Utangac':'Timido','Amca':'Tio',
+    'Mayo':'Traje De Bano','Sakin':'Tranquilo','Uc':'Tres','Giymek':'Usar',
+    'Yaz':'Verano','Elbise':'Vestido','Ruzgarli':'Viento','Yasamak':'Vivir','Ve':'Y'
 }
 
 aktif_sorular = {}
@@ -29,74 +63,121 @@ def ipucu_goster(cevap: str, acik_harf: int) -> str:
     return sonuc
 
 def yeni_soru_baslat(chat_id: int, mod: str):
-    türkçe, ispanyolca = random.choice(list(kelimeler.items()))
+    turkce, ispanyolca = random.choice(list(kelimeler.items()))
     aktif_sorular[chat_id] = {
-        'türkçe': türkçe,
+        'turkce': turkce,
         'ispanyolca': ispanyolca,
         'yanlis': 0,
         'acik': 0,
         'mod': mod
     }
-    return türkçe, ispanyolca
+    return turkce, ispanyolca
 
 @dp.message(Command("start"))
 async def start(message: types.Message):
     await message.answer(
-        "👋 Hola! İspanyolca kelime botuna hoş geldin!\n\n"
-        "📚 Komutlar:\n"
-        "/sor — Türkçe → İspanyolca sorar\n"
-        "/sor_tr_isp — İspanyolca → Türkçe sorar\n"
-        "/ogret kelime:cevap — Yeni kelime ekle\n"
-        "/liste — Tüm kelimeleri gör\n"
-        "kelime anlamı — Kelimenin İspanyolcasını öğren\n\n"
-        "💡 Yanlış cevaplarda ipucu harfleri açılır, 3 yanlışta cevap gösterilir!"
+        "Hola! Ispanyolca kelime botuna hos geldin!\n\n"
+        "Komutlar:\n"
+        "/sor - Turkce sorar, Ispanyolca cevap\n"
+        "/sor2 - Ispanyolca sorar, Turkce cevap\n"
+        "/ogret kelime:cevap - Yeni kelime ekle\n"
+        "/liste - Tum kelimeleri gor\n"
+        "kelime anlami - Kelimenin Ispanyolcasini gren\n\n"
+        "Yanlis cevaplarda ipucu harfleri acilir, 3 yanliста cevap gosterilir!"
     )
 
 @dp.message(Command("sor"))
 async def sor(message: types.Message):
     if not kelimeler:
-        await message.answer("Kelime listesi boş!")
+        await message.answer("Kelime listesi bos!")
         return
-    türkçe, ispanyolca = yeni_soru_baslat(message.chat.id, 'tr_isp')
+    turkce, ispanyolca = yeni_soru_baslat(message.chat.id, 'tr_isp')
     ipucu_bos = ipucu_goster(ispanyolca, 0)
-    await message.answer(f"🇪🇸 '{türkçe}' kelimesinin İspanyolcası nedir?\n\n{ipucu_bos}")
+    await message.answer(f"'{turkce}' kelimesinin Ispanyolcasi nedir?\n\n{ipucu_bos}")
 
-@dp.message(Command("sor_tr_isp"))
-async def sor_tr_isp(message: types.Message):
+@dp.message(Command("sor2"))
+async def sor2(message: types.Message):
     if not kelimeler:
-        await message.answer("Kelime listesi boş!")
+        await message.answer("Kelime listesi bos!")
         return
-    türkçe, ispanyolca = yeni_soru_baslat(message.chat.id, 'isp_tr')
-    ipucu_bos = ipucu_goster(türkçe, 0)
-    await message.answer(f"🇹🇷 '{ispanyolca}' kelimesinin Türkçesi nedir?\n\n{ipucu_bos}")
+    turkce, ispanyolca = yeni_soru_baslat(message.chat.id, 'isp_tr')
+    ipucu_bos = ipucu_goster(turkce, 0)
+    await message.answer(f"'{ispanyolca}' kelimesinin Turkcesi nedir?\n\n{ipucu_bos}")
 
 @dp.message(Command("ogret"))
 async def ogret(message: types.Message):
     try:
         metin = message.text.split(" ", 1)[1]
-        türkçe, ispanyolca = metin.split(":")
-        kelimeler[türkçe.strip()] = ispanyolca.strip()
-        await message.answer(f"✅ '{türkçe.strip()}' = '{ispanyolca.strip()}' eklendi!")
+        turkce, ispanyolca = metin.split(":")
+        kelimeler[turkce.strip()] = ispanyolca.strip()
+        await message.answer(f"'{turkce.strip()}' = '{ispanyolca.strip()}' eklendi!")
     except:
-        await message.answer("⚠️ Format: /ogret kelime:cevap\nÖrnek: /ogret masa:mesa")
+        await message.answer("Format: /ogret kelime:cevap\nOrnek: /ogret masa:mesa")
 
 @dp.message(Command("liste"))
 async def liste(message: types.Message):
     if not kelimeler:
-        await message.answer("Liste boş.")
+        await message.answer("Liste bos.")
         return
-    metin = "📖 Kelime Listesi:\n\n"
+    metin = "Kelime Listesi:\n\n"
     for tr, es in kelimeler.items():
-        metin += f"🇹🇷 {tr} → 🇪🇸 {es}\n"
+        metin += f"{tr} = {es}\n"
     await message.answer(metin)
 
 @dp.message()
 async def cevap_kontrol(message: types.Message):
     chat_id = message.chat.id
-    metin = message.text.strip
+    metin = message.text.strip()
+
+    if metin.lower().endswith(" anlami"):
+        aranan = metin.lower().replace(" anlami", "").strip().title()
+        if aranan in kelimeler:
+            await message.answer(f"'{aranan}' = {kelimeler[aranan]}")
+        else:
+            await message.answer(f"'{aranan}' kelimesi listede bulunamadi.")
+        return
+
+    if chat_id not in aktif_sorular:
+        return
+
+    soru = aktif_sorular[chat_id]
+    turkce = soru['turkce']
+    ispanyolca = soru['ispanyolca']
+    mod = soru['mod']
+    verilen = metin.lower()
+
+    if mod == 'tr_isp':
+        dogru = ispanyolca
+        goster = turkce
+        ipucu_kaynak = ispanyolca
+        def sonraki(t, i):
+            return f"Siradaki:\n'{t}' kelimesinin Ispanyolcasi nedir?\n\n{ipucu_goster(i, 0)}"
+    else:
+        dogru = turkce
+        goster = ispanyolca
+        ipucu_kaynak = turkce
+        def sonraki(t, i):
+            return f"Siradaki:\n'{i}' kelimesinin Turkcesi nedir?\n\n{ipucu_goster(t, 0)}"
+
+    if verilen == dogru.lower():
+        await message.answer(f"Dogru! '{goster}' = '{dogru}'")
+        yeni_tr, yeni_isp = yeni_soru_baslat(chat_id, mod)
+        await message.answer(sonraki(yeni_tr, yeni_isp))
+    else:
+        soru['yanlis'] += 1
+        soru['acik'] += 1
+        yanlis = soru['yanlis']
+
+        if yanlis >= 3:
+            await message.answer(f"3 yanlis! Cevap: '{dogru}'\n\nYeni soru geliyor...")
+            yeni_tr, yeni_isp = yeni_soru_baslat(chat_id, mod)
+            await message.answer(sonraki(yeni_tr, yeni_isp))
+        else:
+            ipucu = ipucu_goster(ipucu_kaynak, soru['acik'])
+            await message.answer(f"Yanlis! ({yanlis}/3)\n\nIpucu: {ipucu}")
 
 async def main():
-    print("Bot çalışıyor... 🚀")
+    print("Bot calisiyor...")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
