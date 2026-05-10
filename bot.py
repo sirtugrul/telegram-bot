@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 import os
 
-TOKEN = "8764241778:AAGTRiLk-FJzwG08dWe2t7BBqxSS8LH6dNQ"
+TOKEN = os.environ.get("TOKEN")
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
@@ -94,3 +94,10 @@ async def liste(message: types.Message):
 async def cevap_kontrol(message: types.Message):
     chat_id = message.chat.id
     metin = message.text.strip
+
+async def main():
+    print("Bot çalışıyor... 🚀")
+    await dp.start_polling(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
