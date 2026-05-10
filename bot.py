@@ -78,15 +78,15 @@ async def start(message: types.Message):
     await message.answer(
         "Hola! Ispanyolca kelime botuna hos geldin!\n\n"
         "Komutlar:\n"
-        "/sor - Turkce sorar, Ispanyolca cevap\n"
-        "/sor2 - Ispanyolca sorar, Turkce cevap\n"
+        "/sor_turToisp - Turkce sorar, Ispanyolca cevap\n"
+        "/sor_ispTotur - Ispanyolca sorar, Turkce cevap\n"
         "/ogret kelime:cevap - Yeni kelime ekle\n"
         "/liste - Tum kelimeleri gor\n"
         "kelime anlami - Kelimenin Ispanyolcasini gren\n\n"
         "Yanlis cevaplarda ipucu harfleri acilir, 3 yanliста cevap gosterilir!"
     )
-
-@dp.message(Command("sor"))
+aktif_sorular.pop(chat_id, None)
+@dp.message(Command("sor_turToisp "))
 async def sor(message: types.Message):
     if not kelimeler:
         await message.answer("Kelime listesi bos!")
@@ -94,8 +94,8 @@ async def sor(message: types.Message):
     turkce, ispanyolca = yeni_soru_baslat(message.chat.id, 'tr_isp')
     ipucu_bos = ipucu_goster(ispanyolca, 0)
     await message.answer(f"'{turkce}' kelimesinin Ispanyolcasi nedir?\n\n{ipucu_bos}")
-
-@dp.message(Command("sor2"))
+aktif_sorular.pop(chat_id, None)
+@dp.message(Command("sor_ispTotur"))
 async def sor2(message: types.Message):
     if not kelimeler:
         await message.answer("Kelime listesi bos!")
@@ -103,7 +103,7 @@ async def sor2(message: types.Message):
     turkce, ispanyolca = yeni_soru_baslat(message.chat.id, 'isp_tr')
     ipucu_bos = ipucu_goster(turkce, 0)
     await message.answer(f"'{ispanyolca}' kelimesinin Turkcesi nedir?\n\n{ipucu_bos}")
-
+aktif_sorular.pop(chat_id, None)
 @dp.message(Command("ogret"))
 async def ogret(message: types.Message):
     try:
@@ -113,7 +113,7 @@ async def ogret(message: types.Message):
         await message.answer(f"'{turkce.strip()}' = '{ispanyolca.strip()}' eklendi!")
     except:
         await message.answer("Format: /ogret kelime:cevap\nOrnek: /ogret masa:mesa")
-
+aktif_sorular.pop(chat_id, None)
 @dp.message(Command("liste"))
 async def liste(message: types.Message):
     if not kelimeler:
