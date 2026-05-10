@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 import os
 
-TOKEN = "YENI_TOKENINI_YAZ"
+TOKEN = "8764241778:AAGTRiLk-FJzwG08dWe2t7BBqxSS8LH6dNQ"
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
